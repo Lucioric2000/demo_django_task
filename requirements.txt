@@ -5,3 +5,4 @@ django==3.2
 sqlparse
 tzdata
 django-bootstrap-v5
+django-htmx

@@ -2,4 +2,51 @@
 {% block title %}Features list{% endblock %}
 {% block contents %}
     <h1>Features list</h1>
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">Create feature</button>
+    <table class="table table-striped">
+    <thead>
+        <td>Feature</td><td>Text</td><td>Description</td>
+    </thead>
+    <tbody>
+        {% for feature in object_list %}
+            <tr>
+                <td>
+                    {{ feature.name }}
+                </td><td>
+                    <a href="{% url 'feedbacker:feature_edit' feature.id %}">(edit)</a>
+                </td><td>
+                    ntags
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td>No features registered yet</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create feature</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'">
+                <div class="modal-body">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name"></input>
+                </div>
+                <div class="modal-footer submit-row">
+                    <button type="submit" class="btn btn-primary" hx-post="{% url 'feedbacker:feature_create' %}">Create</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

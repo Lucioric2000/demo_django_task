@@ -12,6 +12,7 @@
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'css/sidebars.css' %}" />
+    <script src="https://unpkg.com/htmx.org@1.8.2"></script>
     <title>{% block title %}Title{% endblock %}</title>
 </head>
 <body>
@@ -21,7 +22,7 @@
     {% bootstrap_messages %}
     <script src="https://kit.fontawesome.com/666340fc51.js" crossorigin="anonymous"></script>
 
-    <main>
+    <main id="main">
         <h1 class="visually-hidden">Sidebars examples</h1>
         <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
             {% for ccategory in categories %}
@@ -33,10 +34,11 @@
             {%  endfor %}
         </div>
         <div class="b-example-divider"></div>
-
-        {% block contents %}
-            {{ lipsum }}
-        {% endblock %}
+        <div class="container">
+            {% block contents %}
+                {{ lipsum }}
+            {% endblock %}
+        </div>
 
     </main>
 </body>
