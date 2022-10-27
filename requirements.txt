@@ -1,0 +1,7 @@
+asgiref
+backports.zoneinfo
+certifi
+django==3.2
+sqlparse
+tzdata
+django-bootstrap-v5
