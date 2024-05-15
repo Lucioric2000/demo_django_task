@@ -1,4 +1,5 @@
-Demo Django project, following the specifications in the document:
+This is a demo Dhango project, showing some of my coding capabilities
+If you want to see the project in action, you can visit the link: https://demodjangotask-lucioric2000.replit.app/
 
 ## Installation:
 To set up this package, you may use the conda packages manager (https://www.anaconda.com/), to create a virtual environment for the project, with the commands:
