@@ -1,5 +1,5 @@
 
 <form method="post">{% csrf_token %}
-<p>Are you sure you want to delete the feature "{{ object.name }}"?</p>
+<p>Are you sure you want to delete the {{ entity }} "{{ object.name }}"?</p>
     <input type="submit" value="Confirm">
 </form>

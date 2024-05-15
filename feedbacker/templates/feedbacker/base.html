@@ -42,4 +42,17 @@
 
     </main>
 </body>
+<script>
+    function delayedClose() {
+        setTimeout(function() {
+            document.getElementById('closeButton').click();
+            document.getElementById('name').value = '';
+            const description = document.getElementById('description');
+            if (description!==null) {
+                description.value = '';
+            }
+            window.location.reload();
+        }, 1000); // Delay of 1 second
+    }
+</script>
 </html>

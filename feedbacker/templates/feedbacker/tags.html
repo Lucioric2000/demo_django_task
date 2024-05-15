@@ -2,4 +2,59 @@
 {% block title %}Tags list{% endblock %}
 {% block contents %}
     <h1>Tags list</h1>
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">Create tag</button>
+    <table class="table table-striped">
+    <thead>
+        <td>Tag</td><td>Commands</td>
+    </thead>
+    <tbody>
+        {% for tag in object_list %}
+            <tr>
+                <td>
+                    {{ tag.name }}
+                </td><td>
+                    <a href="{% url 'feedbacker:tag_edit' tag.id %}">(edit)</a>
+                    <a href="{% url 'feedbacker:tag_delete' tag.id %}">(delete)</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td>No tags registered yet</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create tag</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td><label for="name">Name:</label></td>
+                            <td><input type="text" id="name" name="name"/></td>
+                        </tr>
+                        <!--tr>
+                            <td><label for="description">Description:</label></td>
+                            <td><textarea id="description" name="description"></textarea></td>
+                        </tr-->
+                    </table>
+                </div>
+                <div class="modal-footer submit-row">
+                    <span id="submit-result"></span>
+                    <button type="submit" class="btn btn-primary" hx-post="{% url 'feedbacker:tag_create' %}" hx-swap="innerHTML" hx-target="#submit-result">Create</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeButton">Close</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

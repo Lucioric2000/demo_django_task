@@ -14,6 +14,10 @@ class Tag(models.Model):
     name = models.CharField(max_length=80, unique=True)
 
 
+class User(models.Model):
+    name = models.CharField(max_length=80, unique=True)
+
+
 class Project(models.Model):
     name = models.CharField(max_length=80, unique=True)
     description = models.TextField()
