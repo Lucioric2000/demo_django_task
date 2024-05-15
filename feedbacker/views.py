@@ -18,19 +18,38 @@ class FeaturesView(ListView):
     model = Feature
     extra_context = {'categories': categories, 'category': 'features'}
 
+
 class FeatureCreateView(View):
     model = Feature
     def post(self, request):
         print("rp", request.POST, request)
         form = FeatureCreateForm(request.POST)
         if form.is_valid():
-            return HttpResponse("Created")
+            form.save()
+            return HttpResponse("Created<script>delayedClose()</script>")
         else:
-            return HttpResponse("Invalid name")
+            return HttpResponse("Invalid name", status=200, reason="Invalid name reason")
 
 
 class FeatureEditView(UpdateView):
     model = Feature
+    fields = ['name', 'description']
+    success_url = "/feedbacker/features"
+
+
+# import generic UpdateView
+from django.views.generic.edit import DeleteView
+
+
+class FeatureDeleteView(DeleteView):
+    # specify the model you want to use
+    model = Feature
+
+    # can specify success url
+    # url to redirect after successfully
+    # deleting object
+    success_url = "/feedbacker/features"
+
 
 
 class TagsView(TemplateView):

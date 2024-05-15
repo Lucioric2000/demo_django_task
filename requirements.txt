@@ -1,7 +1,7 @@
 asgiref
-backports.zoneinfo
+#backports.zoneinfo
 certifi
-django==3.2
+django
 sqlparse
 tzdata
 django-bootstrap-v5

@@ -1,5 +1,8 @@
 {% extends "feedbacker/base.html" %}
-{% block title %}Bank Accounts and transactions{% endblock %}
+{% block title %}Feedback handler{% endblock %}
 {% block contents %}
-    <h1>Bank Accounts and transactions</h1>
+    <h1>Feature tracker</h1>
+    <li><a href="{% url "feedbacker:features" %}">Features</a></li>
+    <li><a href="{% url "feedbacker:tags" %}">Tags</a></li>
+    <li><a href="{% url "feedbacker:users" %}">Users</a></li>
 {% endblock %}

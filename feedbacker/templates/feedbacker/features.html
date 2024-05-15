@@ -6,7 +6,7 @@
     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">Create feature</button>
     <table class="table table-striped">
     <thead>
-        <td>Feature</td><td>Text</td><td>Description</td>
+        <td>Feature</td><td>Description</td><td>Commands</td>
     </thead>
     <tbody>
         {% for feature in object_list %}
@@ -14,9 +14,10 @@
                 <td>
                     {{ feature.name }}
                 </td><td>
-                    <a href="{% url 'feedbacker:feature_edit' feature.id %}">(edit)</a>
+                    {{ feature.description }}
                 </td><td>
-                    ntags
+                    <a href="{% url 'feedbacker:feature_edit' feature.id %}">(edit)</a>
+                    <a href="{% url 'feedbacker:feature_delete' feature.id %}">(delete)</a>
                 </td>
             </tr>
         {% empty %}
@@ -35,18 +36,35 @@
                 <h4 class="modal-title">Create feature</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'">
+            <form hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
                 <div class="modal-body">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name"></input>
+                    <table>
+                        <tr>
+                            <td><label for="name">Name:</label></td>
+                            <td><input type="text" id="name" name="name"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="description">Description:</label></td>
+                            <td><textarea id="description" name="description"></textarea></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="modal-footer submit-row">
-                    <button type="submit" class="btn btn-primary" hx-post="{% url 'feedbacker:feature_create' %}">Create</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <span id="submit-result"></span>
+                    <button type="submit" class="btn btn-primary" hx-post="{% url 'feedbacker:feature_create' %}" hx-swap="innerHTML" hx-target="#submit-result">Create</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeButton">Close</button>
                 </div>
 
             </form>
         </div>
     </div>
 </div>
+<script>
+    function delayedClose() {
+        setTimeout(function() {
+            document.getElementById('closeButton').click();
+            window.location.reload();
+        }, 1000); // Delay of 1 second
+    }
+</script>
 {% endblock %}

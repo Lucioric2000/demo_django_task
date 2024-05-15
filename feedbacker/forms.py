@@ -7,5 +7,5 @@ from feedbacker import models
 class FeatureCreateForm(forms.ModelForm):
     class Meta:
         model = models.Feature
-        fields = ['name']
+        fields = ['name', 'description']
 
