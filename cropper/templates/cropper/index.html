@@ -1,0 +1,57 @@
+{% load i18n static bootstrap5 %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Color replacer</h1>
+    <table>
+        <tbody>
+            <tr>
+                <td><label for="image_file">Image file:</label></td>
+                <td colspan="2"><input type="file" id="image_file" name="image_file" accept="image/png, image/gif, image/jpeg" /></td>
+            </tr>
+            <tr>
+                <td><label for="old_color">Old color:</label></td>
+                <td><input type="color" id="old_color" name="old_color" value="#FFFFFF" /></td>
+                <td><button id="apply_metal">Apply metal</button><input type="file" id="metal_image_file" name="metal_image_file" accept="image/png, image/gif, image/jpeg" /></td>
+            </tr>
+            <tr>
+                <td><label for="new_color">New color:</label></td>
+                <td><input type="color" id="new_color" name="new_color" value="#e66465" /></td>
+                <td><button id="undo">Undo</button></td>
+            </tr>
+            <tr>
+                <td><label for="tolerance">Color tolerance:</label></td>
+                <td><input type="number" id="tolerance" name="tolerance" value="30" max="767"/></td>
+                <td><button id="change_colors">Change colors</button></td>
+            </tr>
+            <tr>
+                <td><label for="tolerance">Max # of colors in the palette:</label></td>
+                <td><input type="number" id="max_colors_palette" name="max_colors_palette" value="8" max="767"/></td>
+                <td><button id="recreate_palette">Recreate palette</button></td>
+            </tr>
+            <tr>
+                <td><label for="clip">Cropping style</label></td>
+                <td><select id="clip">
+                    <option value="resize-left-top" selected>Resize</option>
+                    <option value="--">--</option>
+                    <option value="trim">trim</option>
+                </select></td>
+                <td><button id="download">Download</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="palette_container">
+        Palette:
+        <div id="palette"></div>
+    </div>
+    <div id="container"></div>
+    <canvas id="metal_canvas"></canvas>
+    <!--script src="https://unpkg.com/konva@9/konva.min.js"></script-->
+    <script src="{% static 'js/konva.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/color_editor.js' %}"></script>
+</body>
+</html>

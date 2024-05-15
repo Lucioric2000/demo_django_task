@@ -5,3 +5,23 @@ body {
 a {
   color: darkblue;
 }
+/*html {
+  height: 100%;
+  width: 100%;
+}*/
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[type="number"] {
+  width: 100px;
+}
+div[id="container"] {
+  overflow: auto;
+}
+canvas[id="metal_canvas"] {
+  display: none;
+}
