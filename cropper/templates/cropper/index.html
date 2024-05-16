@@ -1,12 +1,7 @@
-{% load i18n static bootstrap5 %}<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <h1>Color replacer</h1>
+{% extends "demo_django_task/base.html" %}
+{% load static i18n bootstrap5 %}
+{% block content %}
+        <h1>Color replacer</h1>
     <table>
         <tbody>
             <tr>
@@ -50,8 +45,11 @@
     </div>
     <div id="container"></div>
     <canvas id="metal_canvas"></canvas>
+
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
     <!--script src="https://unpkg.com/konva@9/konva.min.js"></script-->
     <script src="{% static 'js/konva.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/color_editor.js' %}"></script>
-</body>
-</html>
+{% endblock %}
