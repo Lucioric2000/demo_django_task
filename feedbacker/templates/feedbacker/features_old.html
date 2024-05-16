@@ -1,25 +1,27 @@
-{% extends "feedbacker/base_aligned.html" %}
-{% block breadcrumbs %}{% endblock %}
+{% extends "feedbacker/base.html" %}
+{% block title %}Features list{% endblock %}
 {% block contents %}
-    <h1>Users list</h1>
+    <h1>Features list</h1>
     <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">Create user</button>
+    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">Create feature</button>
     <table class="table table-striped">
     <thead>
-        <td>User</td><td>Commands</td>
+        <td>Feature</td><td>Description</td><td>Commands</td>
     </thead>
     <tbody>
-        {% for user in object_list %}
+        {% for feature in object_list %}
             <tr>
                 <td>
-                    {{ user.name }}
+                    {{ feature.name }}
                 </td><td>
-                    <a href="{% url 'feedbacker:user_edit' user.id %}">(edit)</a>
-                    <a href="{% url 'feedbacker:user_delete' user.id %}">(delete)</a>
+                    {{ feature.description }}
+                </td><td>
+                    <a href="{% url 'feedbacker:feature_edit' feature.id %}">(edit)</a>
+                    <a href="{% url 'feedbacker:feature_delete' feature.id %}">(delete)</a>
                 </td>
             </tr>
         {% empty %}
-            <tr><td>No users registered yet</td></tr>
+            <tr><td>No features registered yet</td></tr>
         {% endfor %}
     </tbody>
 </table>
@@ -31,7 +33,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Create user</h4>
+                <h4 class="modal-title">Create feature</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
@@ -41,15 +43,15 @@
                             <td><label for="name">Name:</label></td>
                             <td><input type="text" id="name" name="name"/></td>
                         </tr>
-                        <!--tr>
+                        <tr>
                             <td><label for="description">Description:</label></td>
                             <td><textarea id="description" name="description"></textarea></td>
-                        </tr-->
+                        </tr>
                     </table>
                 </div>
                 <div class="modal-footer submit-row">
                     <span id="submit-result"></span>
-                    <button type="submit" class="btn btn-primary" hx-post="{% url 'feedbacker:user_create' %}" hx-swap="innerHTML" hx-target="#submit-result">Create</button>
+                    <button type="submit" class="btn btn-primary" hx-post="{% url 'feedbacker:feature_create' %}" hx-swap="innerHTML" hx-target="#submit-result">Create</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeButton">Close</button>
                 </div>
 

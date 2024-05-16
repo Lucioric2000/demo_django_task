@@ -26,3 +26,4 @@ for developing you should install the developing dependencies in the virtual env
 `pip install -r requirements_dev.txt`
 Then, you do the required changes or addition. After finishing, before committing, execute:
 `flake8; isort .; black .`
+y

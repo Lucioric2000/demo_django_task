@@ -2,16 +2,18 @@
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
     <!-- change that for the own favicon -->
     <link rel="icon" href="{% static "img/logo.jpg" %}">
     <!-- getbootstrap.com template. check it out and merge into the own CSS file. -->
-    <link href="https://getbootstrap.com/docs/4.0/examples/pricing/pricing.css" rel="stylesheet">
+    <!--link href="https://getbootstrap.com/docs/4.0/examples/pricing/pricing.css" rel="stylesheet"-->
+    {% bootstrap_css %}
     <!-- Project CSSs-->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- CSS only -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"-->
     {#% bootstrap_css %#}
     <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}">
     {#% if not is_popup and is_nav_sidebar_enabled %#}
@@ -29,10 +31,14 @@
     {% endblock %}
   {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
 </head>
-{% load i18n %}
 
 <body class="{#% if is_popup %}popup {% endif %#}{% block bodyclass %}{% endblock %}"
   data-admin-utc-offset="{% now "Z" %}">
+    {% bootstrap_javascript %}
+
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
+    <script src="https://kit.fontawesome.com/666340fc51.js" crossorigin="anonymous"></script>
 
     <!-- Container -->
     <!--div id="_container"-->
@@ -96,7 +102,7 @@
               {% include "admin/nav_sidebar.html" %}
             {% endblock %}
           {% endif %}
-          <div class="content">
+          <div class="content" id="content">
             {% block messages %}
               {% if messages %}
                 <ul class="messagelist">{% for message in messages %}
@@ -105,7 +111,7 @@
               {% endif %}
             {% endblock messages %}
             <!-- Content -->
-            <div id="content" class="{% block coltype %}colM{% endblock %}">
+            <div id="{% block content_div_id %}content{% endblock %}" class="{% block coltype %}colM{% endblock %}">
               {% block pretitle %}{% endblock %}
               {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
               {% block content_subtitle %}{% if subtitle %}<h2>{{ subtitle }}</h2>{% endif %}{% endblock %}

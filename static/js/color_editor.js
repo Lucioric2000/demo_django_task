@@ -124,15 +124,14 @@ const applyMetalFilter = function(imageData) {
         let metalGreen = metalImageData.data[metalIndex+1];
         let metalBlue = metalImageData.data[metalIndex+2];
         let metalAlpha = metalImageData.data[metalIndex+3];
-        //const colordiff = Math.abs(data[i] - from_color[0]) + Math.abs(data[i + 1] - from_color[1]) + Math.abs(data[i + 2] - from_color[2]);
-        //if(colordiff<tolerance) {
-        data[i] = 255-((255-data[i])+(255-metalRed))/2;     // red
-        data[i + 1] = 255-((255-data[i+1])+(255-metalGreen))/2; // green
-        data[i + 2] = 255-((255-data[i+2])+(255-metalBlue))/2; // blue
-        //}
+        let lightness = (data[i] + data[i+1] + data[i+2]) / 3;
+        if (lightness < 250) {
+            data[i] = 255-((255-data[i])+(255-metalRed))/2;     // red
+            data[i + 1] = 255-((255-data[i+1])+(255-metalGreen))/2; // green
+            data[i + 2] = 255-((255-data[i+2])+(255-metalBlue))/2; // blue
+        }
     }
     return data;
-
 };
 
 const color_diff = function(color1, color2) {
@@ -404,6 +403,7 @@ changeColors.addEventListener('click', function() {
 
 applyMetal.addEventListener('click', function() {
     // Change the color of the logo image
+    console.log("apply metal");
     logoNode.filters([applyMetalFilter, parseColorFilter]);
     logoNode.cache();
 

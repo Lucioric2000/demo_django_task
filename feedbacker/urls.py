@@ -23,6 +23,7 @@ app_name = 'feedbacker'
 urlpatterns = [
     path("", views.IndexView.as_view(), name='index'),
     path("features", views.FeaturesView.as_view(), name='features'),
+    path("features_old", views.OldFeaturesView.as_view(), name='features_old'),
     path("features/add", views.FeatureCreateView.as_view(), name='feature_create'),
     path("features/edit/<int:pk>", views.FeatureEditView.as_view(), name='feature_edit'),
     path("features/delete/<int:pk>", views.FeatureDeleteView.as_view(), name='feature_delete'),

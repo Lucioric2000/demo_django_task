@@ -1,0 +1,49 @@
+{% extends "demo_django_task/base.html" %}
+{% block breadcrumbs %}{% endblock %}
+{% block coltype %}colM{% endblock %}
+{% block content_div_id %}content{% endblock %}
+{% load i18n static bootstrap5 %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/sidebars.css' %}" />
+    <script src="https://unpkg.com/htmx.org@1.8.2"></script>
+    <script src="https://kit.fontawesome.com/666340fc51.js" crossorigin="anonymous"></script>
+{% endblock %}
+{% block responsive %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% endblock %}
+{% block content %}
+    <!--main id="scontent"-->
+        <h1 class="visually-hidden">Sidebars examples</h1>
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+            {% for ccategory in categories %}
+                {% if category == ccategory %}
+                    <b><a class="nav-link" href="{% url 'feedbacker:'|add:ccategory %}">{{ ccategory|capfirst }}</a></b>
+                {%  else %}
+                    <a class="nav-link" href="{% url 'feedbacker:'|add:ccategory %}">{{ ccategory|capfirst }}</a>
+                {% endif %}
+            {%  endfor %}
+        </div>
+        <div class="b-example-divider"></div>
+        <div class="scontainer">
+            {% block contents %}
+                {{ lipsum }}
+            {% endblock %}
+        </div>
+    <!--/main-->
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script>
+        function delayedClose() {
+            setTimeout(function() {
+                document.getElementById('closeButton').click();
+                document.getElementById('name').value = '';
+                const description = document.getElementById('description');
+                if (description!==null) {
+                    description.value = '';
+                }
+                window.location.reload();
+            }, 1000); // Delay of 1 second
+        }
+    </script>
+{% endblock %}

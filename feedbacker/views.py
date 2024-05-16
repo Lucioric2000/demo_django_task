@@ -19,6 +19,10 @@ class FeaturesView(ListView):
     model = Feature
     extra_context = {'categories': categories, 'category': 'features'}
 
+class OldFeaturesView(ListView):
+    template_name = "feedbacker/features_old.html"
+    model = Feature
+    extra_context = {'categories': categories, 'category': 'features'}
 
 class FeatureCreateView(View):
     model = Feature
