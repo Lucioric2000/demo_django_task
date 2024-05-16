@@ -1,7 +1,7 @@
 {% extends "demo_django_task/base.html" %}
 {% block breadcrumbs %}{% endblock %}
 {% block coltype %}colM{% endblock %}
-{% block content_div_id %}content{% endblock %}
+{% block content_div_id %}{% endblock %}
 {% load i18n static bootstrap5 %}
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'css/sidebars.css' %}" />
@@ -24,7 +24,7 @@
             {%  endfor %}
         </div>
         <div class="b-example-divider"></div>
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+        <div class="flex-column flex-shrink-0 p-3 bg-light" style="width:80%">
             {% block contents %}
                 {{ lipsum }}
             {% endblock %}
