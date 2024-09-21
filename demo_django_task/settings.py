@@ -125,3 +125,7 @@ STATIC_ROOT = BASE_DIR / "static_prod"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+#CSRF
+#CSRF_COOKIE_DOMAIN = "38b55306-c5a7-45c8-8c13-32eb16a98146-00-210e1hrk0eu6z.riker.replit.dev"
+CSRF_TRUSTED_ORIGINS = ['https://38b55306-c5a7-45c8-8c13-32eb16a98146-00-210e1hrk0eu6z.riker.replit.dev', 'https://demodjangotask-lucioric2000.replit.app']
